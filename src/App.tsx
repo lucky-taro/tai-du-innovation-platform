@@ -1,4 +1,4 @@
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router } from "wouter";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -8,7 +8,7 @@ import { Analytics } from "@/pages/Analytics";
 import { Knowledge } from "@/pages/Knowledge";
 import { Team } from "@/pages/Team";
 
-function App() {
+function AppContent() {
   return (
     <TooltipProvider>
       <div className="min-h-screen flex flex-col bg-background">
@@ -31,6 +31,17 @@ function App() {
         <Footer />
       </div>
     </TooltipProvider>
+  );
+}
+
+function App() {
+  // Detect base path from Vite's import.meta.env.BASE_URL
+  const base = import.meta.env.BASE_URL?.replace(/\/$/, "") || "";
+
+  return (
+    <Router base={base}>
+      <AppContent />
+    </Router>
   );
 }
 
